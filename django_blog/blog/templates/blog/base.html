@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'blog/css/mdb.min.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/main.css' %}">
 
     {% if pageTitle %}
-        <title>django_blog - {{ pageTitle }}</title>
+        <title>{{ pageTitle }} | django_blog</title>
     {% else %}
         <title>django_blog</title>
     {% endif %}
@@ -20,7 +22,7 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
           <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+            <a class="navbar-brand waves-effect mr-4" href="{% url 'blog-home' %}"><strong>Django Blog</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,22 +31,48 @@
                 <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
               </div>
-              <!-- Navbar Right Side -->
-              <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-                {% endif %}
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                  {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a href="{% url 'post-create' %}" class="nav-link border border-light rounded waves-effect">New Post
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'profile' %}" class="nav-link border border-light rounded waves-effect ml-2">Profile
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'logout' %}" class="nav-link border border-light rounded waves-effect ml-2">Logout
+                      </a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'login' %}" class="nav-link border border-light rounded waves-effect">Login
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'register' %}" class="nav-link border border-light rounded waves-effect ml-2">Sign Up
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
               </div>
             </div>
           </div>
         </nav>
     </header>
-    <main role="main" class="container">
+    <main class="container">
         <div class="row">
           <div class="col-md-8">
             {% if messages %}
@@ -54,20 +82,36 @@
                 </div>
               {% endfor %}
             {% endif %}
-            {% block content %}{% endblock content %}
+            {% block content %}
+            
+            {% endblock content %}
           </div>
-          <div class="container col-md-4">
-            <div>
-              <h3 class="text-muted">Our Sidebar</h3>
-              <p class='text-muted'>You can put any information here you'd like</p>
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
+          <!--Grid column-->
+          <div class="col-md-4">
+            <!--Card : Dynamic content wrapper-->
+            <div class="card mb-4 text-center wow fadeIn">
+                <div class="card-header">Do you want to get informed about new articles?</div>
+                <!--Card content-->
+                <div class="card-body">
+                  <!-- Default form login -->
+                  <form>
+                      <!-- Default input email -->
+                      <label for="defaultFormEmailEx" class="grey-text">Your email</label>
+                      <input type="email" id="defaultFormLoginEmailEx" class="form-control">
+                      <br>
+                      <!-- Default input password -->
+                      <label for="defaultFormNameEx" class="grey-text">Your name</label>
+                      <input type="text" id="defaultFormNameEx" class="form-control">
+
+                      <div class="text-center mt-4">
+                      <button class="btn btn-info btn-md" type="submit">Sign up</button>
+                      </div>
+                  </form>
+                  <!-- Default form login -->
+                </div>
             </div>
           </div>
+          <!--Grid column-->
         </div>
     </main>
     <!-- Optional JavaScript -->
@@ -75,5 +119,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'blog/js/mdb.min.js' %}js/mdb.min.js"></script>
+  </body>
 </html>

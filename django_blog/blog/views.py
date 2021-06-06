@@ -11,6 +11,7 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date']
     paginate_by = 2
+    extra_context = {'pageTitle': 'Home'}
 
 class UserPostListView(ListView):
     model = Post

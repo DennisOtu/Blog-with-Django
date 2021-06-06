@@ -1,18 +1,147 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
-        <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-                <small class="text-muted">{{ object.date|date:"F d, Y" }}</small>
-                {% if object.author == user %}
-                    <a class="btn btn-secondary btn-sm mt-1" href="{% url 'post-update' object.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1" href="{% url 'post-delete' object.id %}">Delete</a>
-                {% endif %}
-            </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.content }}</p>
+<div class="row">
+    <!--Card-->
+    <div class="card mb-4 wow fadeIn">
+    <!--Card content-->
+    <div class="card-body">
+        <h1 style="text-transform: capitalize;" class="article-title">{{ object.title }}</h1>
+        <small class="text-muted">By <span style="text-transform: capitalize;">{{ object.author }}</span> on {{ object.date|date:"F d, Y" }}</small>
+
+        <blockquote class="blockquote">
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer class="blockquote-footer">Someone famous in
+                <cite title="Source Title">Source Title</cite>
+            </footer>
+        </blockquote>
+        <p>{{ object.content }}</p>
+    </div>
+
+    </div>
+    <!--/.Card-->
+</div>
+
+<div class="row">
+    <!--Card-->
+    <div class="card mb-4 wow fadeIn">
+        <div class="card-header font-weight-bold">
+            <span>About author</span>
+            <span class="pull-right">
+            <a href="">
+                <i class="fab fa-facebook-f mr-2"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-twitter mr-2"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-instagram mr-2"></i>
+            </a>
+            <a href="">
+                <i class="fab fa-linkedin-in mr-2"></i>
+            </a>
+            </span>
         </div>
-    </article>
+        <!--Card content-->
+        <div class="card-body">
+            <div class="media d-block d-md-flex mt-3">
+                <img class="d-flex mb-3 mx-auto z-depth-1" src="{{ object.author.profile.image.url }}"
+                    alt="" style="width: 100px;">
+                <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                    <a class="mt-0 font-weight-bold" href="{% url 'user-posts' object.author.username %}"><stong style="text-transform: capitalize;">{{ object.author }}</stong></a>
+                    <p>
+                        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                        deleniti atque corrupti
+                        quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                        similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+                        fuga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/.Card-->
+</div>
+
+<div class="row">
+    <!--Comments-->
+    <div class="card card-comments mb-3 wow fadeIn">
+        <div class="card-header font-weight-bold">3 comments</div>
+        <div class="card-body">
+            <div class="media d-block d-md-flex mt-4">
+                <img class="d-flex mb-3 mx-auto article-img" src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg" alt="Generic placeholder image">
+                <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                    <h5 class="mt-0 font-weight-bold">Miley Steward
+                    <a href="" class="pull-right">
+                        <i class="fas fa-reply"></i>
+                    </a>
+                    </h5>
+                    <p>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+
+                    <div class="media d-block d-md-flex mt-3">
+                        <img class="d-flex mb-3 mx-auto article-img" src="https://mdbootstrap.com/img/Photos/Avatars/img (27).jpg"
+                            alt="Generic placeholder image">
+                        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                            <h5 class="mt-0 font-weight-bold">Tommy Smith
+                            <a href="" class="pull-right">
+                                <i class="fas fa-reply"></i>
+                            </a>
+                            </h5>
+                            <p>
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                laudantium, totam rem aperiam, eaque
+                                ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta
+                                sunt explicabo.
+                            </p>
+                        </div>
+                        </div>
+
+                        <!-- Quick Reply -->
+                        <div class="form-group mt-4">
+                            <label for="quickReplyFormComment">Your comment</label>
+                            <textarea class="form-control" id="quickReplyFormComment" rows="5"></textarea>
+
+                            <div class="text-center">
+                                <button class="btn btn-info btn-sm" type="submit">Post</button>
+                            </div>
+                        </div>
+
+
+                        <div class="media d-block d-md-flex mt-3">
+                            <img class="d-flex mb-3 mx-auto article-img" src="https://mdbootstrap.com/img/Photos/Avatars/img (21).jpg"
+                                alt="Generic placeholder image">
+                            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                <h5 class="mt-0 font-weight-bold">Sylvester the Cat<a href="" class="pull-right"><i class="fas fa-reply"></i></a></h5>
+                                <p>
+                                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+                                    sed quia non numquam eius modi
+                                    tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="media d-block d-md-flex mt-3">
+                    <img class="d-flex mb-3 mx-auto article-img" src="https://mdbootstrap.com/img/Photos/Avatars/img (30).jpg" alt="Generic placeholder image">
+                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                        <h5 class="mt-0 font-weight-bold">Caroline Horwitz<a href="" class="pull-right"><i class="fas fa-reply"></i></a></h5>
+                        <p>
+                            At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                            deleniti atque corrupti
+                            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                            similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+                            fuga.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--/.Comments-->
+    </div>
+</div>
+
 {% endblock content %}
