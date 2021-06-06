@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Material Design Bootstrap -->
     <link href="{% static 'blog/css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Animations -->
+    <link href="{% static 'blog/css/animate.css' %}" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/main.css' %}">
 
     {% if pageTitle %}
-        <title>{{ pageTitle }} | django_blog</title>
+      <title>{{ pageTitle }} | django_blog</title>
     {% else %}
-        <title>django_blog</title>
+      <title>django_blog</title>
     {% endif %}
 </head>
 <body>
@@ -89,7 +91,7 @@
           <!--Grid column-->
           <div class="col-md-4">
             <!--Card : Dynamic content wrapper-->
-            <div class="card mb-4 text-center wow fadeIn">
+            <div class="card text-center wow fadeIn content-section">
                 <div class="card-header">Do you want to get informed about new articles?</div>
                 <!--Card content-->
                 <div class="card-body">
@@ -120,6 +122,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="{% static 'blog/js/mdb.min.js' %}js/mdb.min.js"></script>
+    <script type="text/javascript" src="{% static 'blog/js/mdb.min.js' %}"></script>
+    <!-- wow.js animations -->
+    <script src="{% static 'blog/js/wow.min.js' %}"></script>
+    <script>
+      new WOW().init();
+    </script>
   </body>
 </html>
