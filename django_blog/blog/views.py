@@ -52,6 +52,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
+    extra_context = {'pageTitle': 'Confirm Delete'}
     success_url = '/'
 
     def test_func(self):
@@ -59,7 +60,6 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
-
 
 def about(request):
     return render(request, 'blog/about.html', {'pageTitle': 'About Page'})

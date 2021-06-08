@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Material Design Bootstrap -->
@@ -30,7 +32,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
+                {% if pageTitle != 'Home' %}
                 <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
+                {% endif %}
+
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
               </div>
                 <!-- Right -->
@@ -75,46 +80,20 @@
         </nav>
     </header>
     <main class="container">
-        <div class="row">
-          <div class="col-md-8">
-            {% if messages %}
-              {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-            {% block content %}
-            
-            {% endblock content %}
-          </div>
-          <!--Grid column-->
-          <div class="col-md-4">
-            <!--Card : Dynamic content wrapper-->
-            <div class="card text-center wow fadeIn content-section">
-                <div class="card-header">Do you want to get informed about new articles?</div>
-                <!--Card content-->
-                <div class="card-body">
-                  <!-- Default form login -->
-                  <form>
-                      <!-- Default input email -->
-                      <label for="defaultFormEmailEx" class="grey-text">Your email</label>
-                      <input type="email" id="defaultFormLoginEmailEx" class="form-control">
-                      <br>
-                      <!-- Default input password -->
-                      <label for="defaultFormNameEx" class="grey-text">Your name</label>
-                      <input type="text" id="defaultFormNameEx" class="form-control">
-
-                      <div class="text-center mt-4">
-                      <button class="btn btn-info btn-md" type="submit">Sign up</button>
-                      </div>
-                  </form>
-                  <!-- Default form login -->
-                </div>
-            </div>
-          </div>
-          <!--Grid column-->
+      <div>
+        <div>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} wow fadeInDown">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}
+          
+          {% endblock content %}
         </div>
+      </div>
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,38 +1,93 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-{% for post in posts %}
-    <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-        <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-                <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
-            </div>
-        
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-        </div>
-    </article>
-{% endfor %}
+      <!--Section: Jumbotron-->
+      <section class="card mb-4 wow fadeIn" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/gradient1.jpg);">
 
-<div class="text-center mb-4">
-{% if is_paginated %}
-    {% if page_obj.has_previous %}
-        <a href="?page=1">First</a>
-        <a class="font-weight-bold mr-4 ml-4" href="?page={{ page_obj.previous_page_number }}"><</a>
-    {% endif %}
-    
-    {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-            <a class="font-weight-bold btn btn-info mr-1 ml-1" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a class="mr-1 ml-1" href="?page={{ num }}">{{ num }}</a>
+        <!-- Content -->
+        <div class="card-body text-white text-center py-5 px-5 my-5">
+
+          <h1 class="mb-4">
+            <strong>Lorem ipsum, dolor sit amet</strong>
+          </h1>
+          <p>
+            <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit</strong>
+          </p>
+          <p class="mb-4">
+            <strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur facilis magni vitae consequuntur aliquam earum, 
+                atque voluptatibus eligendi ut? Adipisci id saepe, rem quo atque ab!</strong>
+          </p>
+          <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start
+            free tutorial
+            <i class="fas fa-graduation-cap ml-2"></i>
+          </a>
+
+        </div>
+        <!-- Content -->
+      </section>
+      <!--Section: Jumbotron-->
+
+      <hr class="my-5">
+
+      <!--Section: Cards-->
+      <section class="text-center">
+        {% for post in posts %}
+
+        <!--Grid row-->
+        <div class="row mt-3">
+
+            <!--Grid column-->
+            <div class="col-lg-5 col-xl-4 mb-4">
+              <!--Featured image-->
+              <div class="view overlay rounded z-depth-1">
+                <img src="https://mdbootstrap.com/wp-content/uploads/2017/11/brandflow-tutorial-fb.jpg" class="img-fluid wow fadeInLeft"
+                  alt="">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+            </div>
+            <!--Grid column-->
+  
+            <!--Grid column-->
+            <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
+              <h3 class="mb-3 font-weight-bold dark-grey-text"><strong>{{ post.title }}</strong></h3>
+              <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
+
+              <p class="grey-text wow fadeInRight">{{ post.content }}</p>
+              <a href="{% url 'post-detail' post.id %}" class="btn btn-primary btn-md wow fadeInUp">Read More</a>
+            </div>
+            <!--Grid column-->
+  
+        </div>
+        <!--Grid row-->
+        {% endfor %}
+
+      </section>
+
+<!--Pagination-->
+<nav class="d-flex justify-content-center wow fadeInUp my-5">
+    <ul class="pagination pg-orange">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>
         {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-        <a class="font-weight-bold mr-4 ml-4" href="?page={{ page_obj.next_page_number }}">></a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-    {% endif %}
-{% endif %}
-</div>
+        
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
 {% endblock content %}
