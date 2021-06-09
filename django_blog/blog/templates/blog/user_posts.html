@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 <div class="row mx-0">
+    <img class="article-img mt-4 wow fadeIn" src="{{ object.author.profile.image.url }}">
     <h1 class="container font-weight-bold mb-4">{{ page_obj.paginator.count }} posts by <span style="text-transform: capitalize;">{{ view.kwargs.username }}</span></h1>
     <div class="col-md-8 mb-4">
         {% for post in posts %}
@@ -12,14 +13,14 @@
                     </div>
                 
                     <h2 style="text-transform: capitalize;"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-                    <p class="article-content preview">{{ post.content }}</p>
+                    <p class="article-content preview wow fadeInDown">{{ post.content }}</p>
                 </div>
             </article>
         {% endfor %}
     </div>
     <div class="col-md-4">
         <!--Card : Dynamic content wrapper-->
-        <div class="card text-center mb-4 wow fadeIn">
+        <div class="card text-center mb-4 wow fadeInDown">
             <div class="card-header">Do you want to get informed about new articles?</div>
             <!--Card content-->
             <div class="card-body">
@@ -41,7 +42,7 @@
             </div>
         </div>
 
-        <div class="card mb-4 wow fadeIn">
+        <div class="card mb-4 wow fadeInDown">
             <div class="card-header">Related articles</div>
             <!--Card content-->
             <div class="card-body">
