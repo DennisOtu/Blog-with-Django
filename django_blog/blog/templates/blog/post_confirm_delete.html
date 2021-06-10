@@ -5,13 +5,14 @@
         <hr>
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="black-text text-center font-weight-bold form-group mt-4">
-                <p>Are you sure you want to <span class="red-text">delete</span> "{{ object.title }}"?</p>
+            <fieldset class="text-center font-weight-bold form-group mt-4">
+                <p>Are you sure you want to <span class="red-text">delete</span> "<span class="text-primary">{{ object.title }}</span>"?</p>
             </fieldset>
             <div class="form-group text-center">
                 <button class="btn btn-danger btn-md" type="submit">Delete</button>
-                <button class="btn btn-border btn-md font-weight-bold" href="{% url 'post-detail' object.id %}">Cancel</button>
+                <a class="btn btn-border btn-md font-weight-bold" href="{% url 'post-detail' object.id %}">Cancel</a>
             </div>
         </form>
     </div>
 {% endblock content %}
+

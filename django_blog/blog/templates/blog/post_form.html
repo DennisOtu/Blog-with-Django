@@ -5,7 +5,7 @@
         <h2 class="text-center font-weight-bold mt-4">Blog Post</h2>
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group wow fadeInDown">
+            <fieldset class="font-weight-bold form-group wow fadeInDown">
                 <hr>
                 {{ form|crispy }}
             </fieldset>
