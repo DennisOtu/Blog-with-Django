@@ -1,86 +1,41 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<div class="row mx-0">
-    <img class="article-img mt-4 wow fadeIn" src="{{ object.author.profile.image.url }}">
-    <h1 class="container font-weight-bold mb-4">{{ page_obj.paginator.count }} posts by <span style="text-transform: capitalize;">{{ view.kwargs.username }}</span></h1>
-    <div class="col-md-8 mb-4">
+    <hr>
+    <h1 class="container text-center font-weight-bold mb-4"><span style="text-transform: capitalize;">{{ view.kwargs.username }}</span></h1>
+    <hr>
         {% for post in posts %}
-            <article class="media content-section">
-                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+            <section class="row text-center mb-4 mx-0">
                 <div class="media-body">
-                    <div class="article-metadata">
-                        <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
-                    </div>
-                
+                    <img class="rounded-circle article-img mt-4 mb-2" src="{{ post.author.profile.image.url }}">
+                    <p><small class="text-muted">{{ post.date|date:"F d, Y" }}</small></p>
+                    <hr>   
                     <h2 style="text-transform: capitalize;"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-                    <p class="article-content preview wow fadeInDown">{{ post.content }}</p>
+                    <p class="article-content preview my-4 wow fadeInDown">{{ post.content }}</p>
                 </div>
-            </article>
+            </section>
+            <hr>
         {% endfor %}
-    </div>
-    <div class="col-md-4">
-        <!--Card : Dynamic content wrapper-->
-        <div class="card text-center mb-4 wow fadeInDown">
-            <div class="card-header">Do you want to get informed about new articles?</div>
-            <!--Card content-->
-            <div class="card-body">
-                <!-- Default form login -->
-                <form>
-                    <!-- Default input email -->
-                    <label for="defaultFormEmailEx" class="grey-text">Your email</label>
-                    <input type="email" id="defaultFormLoginEmailEx" class="form-control">
-                    <br>
-                    <!-- Default input password -->
-                    <label for="defaultFormNameEx" class="grey-text">Your name</label>
-                    <input type="text" id="defaultFormNameEx" class="form-control">
+<!--Card : Dynamic content wrapper-->
+<div class="row card text-center my-5 wow fadeInDown">
+    <div class="card-header">Do you want to get informed about new articles?</div>
+    <!--Card content-->
+    <div class="card-body">
+        <!-- Default form login -->
+        <form>
+            <!-- Default input email -->
+            <label for="defaultFormEmailEx" class="grey-text">Your email</label>
+            <input type="email" id="defaultFormLoginEmailEx" class="form-control">
+            <br>
+            <!-- Default input password -->
+            <label for="defaultFormNameEx" class="grey-text">Your name</label>
+            <input type="text" id="defaultFormNameEx" class="form-control">
 
-                    <div class="text-center mt-4">
-                    <button class="btn btn-info btn-md" type="submit">Sign up</button>
-                    </div>
-                </form>
-                <!-- Default form login -->
+            <div class="text-center mt-4">
+            <button class="btn btn-info btn-md" type="submit">Sign up</button>
             </div>
-        </div>
-
-        <div class="card mb-4 wow fadeInDown">
-            <div class="card-header">Related articles</div>
-            <!--Card content-->
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    <li class="media">
-                        <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder7.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <a href="">
-                            <h5 class="mt-0 mb-1 font-weight-bold">List-based media object</h5>
-                            </a>
-                            Cras sit amet nibh libero, in gravida nulla (...)
-                        </div>
-                    </li>
-                    <li class="media my-4">
-                        <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder6.jpg" alt="An image">
-                        <div class="media-body">
-                            <a href="">
-                            <h5 class="mt-0 mb-1 font-weight-bold">List-based media object</h5>
-                            </a>
-                            Cras sit amet nibh libero, in gravida nulla (...)
-                        </div>
-                    </li>
-                    <li class="media">
-                        <img class="d-flex mr-3" src="https://mdbootstrap.com/img/Photos/Others/placeholder5.jpg" alt="Generic placeholder image">
-                        <div class="media-body">
-                            <a href="">
-                            <h5 class="mt-0 mb-1 font-weight-bold">List-based media object</h5>
-                            </a>
-                            Cras sit amet nibh libero, in gravida nulla (...)
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!--/.Card-->
-        </div>
-        <!--Grid column-->
+        </form>
+        <!-- Default form login -->
     </div>
-
 </div>
 
 
