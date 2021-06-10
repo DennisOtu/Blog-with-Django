@@ -9,14 +9,14 @@
                     <img class="rounded-circle article-img mt-4 mb-2" src="{{ post.author.profile.image.url }}">
                     <p><small class="text-muted">{{ post.date|date:"F d, Y" }}</small></p>
                     <hr>   
-                    <h2 style="text-transform: capitalize;"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                    <h2 class="font-weight-bold" style="text-transform: capitalize;"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                     <p class="article-content preview my-4 wow fadeInDown">{{ post.content }}</p>
                 </div>
             </section>
             <hr>
         {% endfor %}
 <!--Card : Dynamic content wrapper-->
-<div class="row card text-center my-5 wow fadeInDown">
+<div class="row card text-center my-5">
     <div class="card-header">Do you want to get informed about new articles?</div>
     <!--Card content-->
     <div class="card-body">
@@ -24,14 +24,14 @@
         <form>
             <!-- Default input email -->
             <label for="defaultFormEmailEx" class="grey-text">Your email</label>
-            <input type="email" id="defaultFormLoginEmailEx" class="form-control">
+            <input type="email" id="defaultFormLoginEmailEx" class="form-control wow fadeInDown">
             <br>
             <!-- Default input password -->
             <label for="defaultFormNameEx" class="grey-text">Your name</label>
-            <input type="text" id="defaultFormNameEx" class="form-control">
+            <input type="text" id="defaultFormNameEx" class="form-control wow fadeInDown">
 
             <div class="text-center mt-4">
-            <button class="btn btn-info btn-md" type="submit">Sign up</button>
+            <button class="btn btn-info btn-md wow fadeInUp" type="submit">Sign up</button>
             </div>
         </form>
         <!-- Default form login -->
