@@ -37,3 +37,7 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'users/profile.html', context)
+
+def logoutConfirm(request):
+    return render(request, 'users/logout_confirm.html')
+
