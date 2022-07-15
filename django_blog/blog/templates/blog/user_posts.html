@@ -1,40 +1,72 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-<h1 class="mb-3">Posts by {{ view.kwargs.username}} ({{ page_obj.paginator.count }})</h1>
-{% for post in posts %}
-    <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-        <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-                <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
+    <hr>
+    <h1 class="container text-center font-weight-bold mb-4"><span style="text-transform: capitalize;">{{ view.kwargs.username }}</span></h1>
+    <hr>
+        {% for post in posts %}
+            <section class="row text-center mb-4 mx-0">
+                <div class="media-body">
+                    <img class="rounded-circle article-img mt-4 mb-2" src="{{ post.author.profile.image.url }}">
+                    <p><small class="text-muted">{{ post.date|date:"F d, Y" }}</small></p>
+                    <hr>   
+                    <h2 class="font-weight-bold" style="text-transform: capitalize;"><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                    <p class="article-content preview my-4 wow fadeInDown">{{ post.content }}</p>
+                </div>
+            </section>
+            <hr>
+        {% endfor %}
+<!--Card : Dynamic content wrapper-->
+<div class="row card text-center my-5">
+    <div class="card-header">Do you want to get informed about new articles?</div>
+    <!--Card content-->
+    <div class="card-body">
+        <!-- Default form login -->
+        <form>
+            <!-- Default input email -->
+            <label for="defaultFormEmailEx" class="grey-text">Your email</label>
+            <input type="email" id="defaultFormLoginEmailEx" class="form-control wow fadeInDown">
+            <br>
+            <!-- Default input password -->
+            <label for="defaultFormNameEx" class="grey-text">Your name</label>
+            <input type="text" id="defaultFormNameEx" class="form-control wow fadeInDown">
+
+            <div class="text-center mt-4">
+            <button class="btn btn-info btn-md wow fadeInUp" type="submit">Sign up</button>
             </div>
-        
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-        </div>
-    </article>
-{% endfor %}
-
-<div class="text-center mb-4">
-{% if is_paginated %}
-    {% if page_obj.has_previous %}
-        <a href="?page=1">First</a>
-        <a class="font-weight-bold mr-4 ml-4" href="?page={{ page_obj.previous_page_number }}"><</a>
-    {% endif %}
-
-    {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-            <a class="font-weight-bold btn btn-info mr-1 ml-1" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a class="mr-1 ml-1" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-        <a class="font-weight-bold mr-4 ml-4" href="?page={{ page_obj.next_page_number }}">></a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-    {% endif %}
-{% endif %}
+        </form>
+        <!-- Default form login -->
+    </div>
 </div>
+
+
+<!--Pagination-->
+{% if is_paginated %}
+<nav class="d-flex justify-content-center wow fadeInUp my-5">
+    <ul class="pagination pg-orange">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo;</a>
+        </li>
+        {% endif %}
+        
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
 {% endblock content %}

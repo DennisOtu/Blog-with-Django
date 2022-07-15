@@ -2,22 +2,24 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <div class="content-section">
-    <div class="media">
-      <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+    <div class="text-center media">
       <div class="media-body">
-        <h2 class="account-heading">{{ user.username }}</h2>
-        <p class="text-secondary">{{ user.email }}</p>
+        <hr>
+        <h2 style="text-transform: capitalize;" class="font-weight-bold account-heading my-4 wow fadeInDown">{{ user.username }}</h2>
+        <hr>
+        <img class="rounded-circle account-img mt-4 wow fadeIn" src="{{ user.profile.image.url }}">
+        <p class="text-primary wow fadeInDown"><small>{{ user.email }}</small></p>
       </div>
     </div>
+    <hr class="wow fadeInDown my-4">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Profile info</legend>
+      <fieldset class="font-weight-bold my-4 form-group wow fadeInLeft">
           {{ u_form|crispy }}
           {{ p_form|crispy }}
       </fieldset>
-      <div class="form-group">
-          <button class="btn btn-outline-info" type="submit">Update</button>
+      <div class="text-center form-group">
+          <button class="btn btn-warning btn-md wow fadeInUp" type="submit">Update</button>
       </div>
     </form>
   </div>

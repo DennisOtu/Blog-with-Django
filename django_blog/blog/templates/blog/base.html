@@ -5,75 +5,157 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'blog/css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Animations -->
+    <link href="{% static 'blog/css/animate.css' %}" rel="stylesheet">
+    <!-- Font Link --> 
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@500&family=Indie+Flower&family=Roboto&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/main.css' %}">
 
     {% if pageTitle %}
-        <title>django_blog - {{ pageTitle }}</title>
+      <title>{{ pageTitle }} | django_blog</title>
     {% else %}
-        <title>django_blog</title>
+      <title>django_blog</title>
     {% endif %}
 </head>
 <body>
     <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <nav class="navbar navbar-expand bg-steel fixed-top py-0">
           <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand waves-effect mr-4" href="{% url 'blog-home' %}"><strong>Django Blog</strong></a>
+            <button class="navbar-toggler wow fadeInDown" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
               <div class="navbar-nav mr-auto">
+                {% if pageTitle != 'Home' %}
                 <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-                <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
-              </div>
-              <!-- Navbar Right Side -->
-              <div class="navbar-nav">
-                {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                 {% endif %}
+
+                <!-- <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>-->
+              </div>
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                  {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a href="{% url 'post-create' %}" class="nav-link border border-light rounded waves-effect">New Post
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'profile' %}" class="nav-link border border-light rounded waves-effect ml-2">Profile
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'logout_confirm' %}" class="nav-link border border-light rounded waves-effect ml-2">Logout
+                      </a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a href="" class="nav-link waves-effect">
+                        <i class="fab fa-facebook-f"></i>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="" class="nav-link waves-effect">
+                        <i class="fab fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'login' %}" class="nav-link border border-light rounded waves-effect">Login
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'register' %}" class="nav-link border border-light rounded waves-effect ml-2">Sign Up
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
               </div>
             </div>
           </div>
         </nav>
     </header>
-    <main role="main" class="container">
-        <div class="row">
-          <div class="col-md-8">
-            {% if messages %}
-              {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-            {% block content %}{% endblock content %}
-          </div>
-          <div class="container col-md-4">
-            <div>
-              <h3 class="text-muted">Our Sidebar</h3>
-              <p class='text-muted'>You can put any information here you'd like</p>
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </div>
-          </div>
+    <main class="container">
+      <div>
+        <div>
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} wow fadeInDown">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}
+          
+          {% endblock content %}
         </div>
+      </div>
     </main>
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mdb-color darken-2 mt-4 wow fadeInUp">
+    <hr class="my-4">
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+
+      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
+        <i class="fab fa-google-plus-g mr-3"></i>
+      </a>
+
+      <a href="https://dribbble.com/mdbootstrap" target="_blank">
+        <i class="fab fa-dribbble mr-3"></i>
+      </a>
+
+      <a href="https://pinterest.com/mdbootstrap" target="_blank">
+        <i class="fab fa-pinterest mr-3"></i>
+      </a>
+
+      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
+        <i class="fab fa-github mr-3"></i>
+      </a>
+
+      <a href="http://codepen.io/mdbootstrap/" target="_blank">
+        <i class="fab fa-codepen mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href=""></a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'blog/js/mdb.min.js' %}"></script>
+    <!-- wow.js animations -->
+    <script src="{% static 'blog/js/wow.min.js' %}"></script>
+    <script>
+      new WOW().init();
+    </script>
+  </body>
 </html>

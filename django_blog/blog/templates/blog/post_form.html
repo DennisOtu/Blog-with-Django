@@ -2,14 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
+        <h2 class="text-center font-weight-bold mt-4">Blog Post</h2>
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Blog Post</legend>
+            <fieldset class="font-weight-bold form-group wow fadeInDown">
+                <hr>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
+            <div class="form-group text-center">
+                <button class="btn btn-warning btn-md wow fadeInUp" type="submit">Post</button>
             </div>
         </form>
     </div>

@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="content-section">
+        <h2 class="text-center font-weight-bold my-4 wow fadeInDown">Logout</h2>
+        <hr>
+        <div class="text-center font-weight-bold mt-4 wow fadeInDown">
+            <p>Are you sure you want to <span class="red-text">logout</span>?</p>
+        </div>
+        <div class="text-center wow fadeInUp">
+            <a href="{% url 'logout' %}" class="btn btn-danger btn-md">Logout</button>
+            <a class="btn btn-border btn-md font-weight-bold" href="{% url 'blog-home' %}">Cancel</a>
+        </div>
+    </div>
+{% endblock content %}
